@@ -21,7 +21,7 @@ struct ProductView: View {
             
             
             HStack {
-                if let imageURL = URL(string: product.image), product.image.count != 0 {
+                if let imageURL = URL(string: product.image), product.image.count != 0 { //checking image url is empty or not
                     AsyncImage(url: imageURL) { image in
                         image.resizable()
                             .aspectRatio(contentMode: .fill)
@@ -31,13 +31,14 @@ struct ProductView: View {
                     .frame(width: 60, height: 60)
                     .cornerRadius(10)
                 } else {
-                    defaultImage
+                    defaultImage // default image ,  clip symbol from SF symbol
                         .resizable()
                         .frame(width: 50, height: 50)
                         .foregroundColor(.blue)
                         .cornerRadius(10)
                 }
                 
+                //Information abount the product name , type , price , tax ..
                 VStack(alignment: .leading) {
                     Text(product.productName)
                         .font(.system(size: 22))

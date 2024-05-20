@@ -21,7 +21,7 @@ struct ContentView: View {
         else
         {
             return viewModel.productDetails.filter { product in
-                product.productName.lowercased().hasPrefix(queryString.lowercased())
+                product.productName.lowercased().hasPrefix(queryString.lowercased())// Filter products that start with the search query
             }
         }
     }
@@ -35,7 +35,7 @@ struct ContentView: View {
                 
                 ZStack{
                     
-                    Color("creamDark").ignoresSafeArea()
+                    Color("creamDark").ignoresSafeArea() // Set the background color
                     
                     if viewModel.isLoading {
                         ProgressView("Loading...") // Display loading indicator if data is not yet fetched
@@ -51,7 +51,7 @@ struct ContentView: View {
                                         .listRowSeparator(.hidden)
                                         .padding(.vertical, 8)
                                         .redacted(reason: viewModel.isLoading ? .placeholder : [])
-                                        .listRowBackground(Color("creamDark"))
+                                        .listRowBackground(Color("creamDark")) // Set row background color
                                     
                                 }
                             }
@@ -62,6 +62,8 @@ struct ContentView: View {
                             NavigationLink(destination: AddProductView(), isActive: $showingAddProductView) {
                                 EmptyView()
                             }
+                            
+                            // Menu button to show AddProductView
                             
                             Menu{
                                 Button(action: {
@@ -84,10 +86,10 @@ struct ContentView: View {
                     
                 }
                 .onAppear {
-                    viewModel.fetch()
+                    viewModel.fetch() // Fetch product details when the view appears
                 }
                 .navigationTitle("Product Details")
-                .searchable(text: $queryString, prompt: "Search Products")
+                .searchable(text: $queryString, prompt: "Search Products")// Add search bar
                 .toolbarBackground(
                     
                     // 1
