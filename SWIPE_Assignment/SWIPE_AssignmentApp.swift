@@ -12,6 +12,7 @@ struct SWIPE_AssignmentApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                
         }
     }
 }

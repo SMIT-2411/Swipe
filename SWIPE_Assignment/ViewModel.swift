@@ -18,8 +18,11 @@ struct ProductDetails: Hashable, Codable {
 
 class ViewModel: ObservableObject {
     @Published var productDetails: [ProductDetails] = []
+    @Published var isLoading = false
     
     func fetch() {
+        
+        isLoading = true
         guard let url = URL(string: "https://app.getswipe.in/api/public/get") else {
             return
         }
@@ -35,6 +38,7 @@ class ViewModel: ObservableObject {
                 let productDetails = try decoder.decode([ProductDetails].self, from: data)
                 DispatchQueue.main.async {
                     self?.productDetails = productDetails
+                    self?.isLoading = false
                 }
             } catch {
                 print(error.localizedDescription)
@@ -44,3 +48,5 @@ class ViewModel: ObservableObject {
         task.resume()
     }
 }
+
+
